@@ -7,7 +7,7 @@ const ProvinceRoute = (provinceController) => {
     const {registerProvince,findProvince,findProvinceById} = provinceController();
     router.post('/',authMiddleware, registerProvince);
     router.get('/', authMiddleware,findProvince);
-    router.get('/:id', authMiddleware,findProvinceById);
+    router.get('/:id',authMiddleware, findProvinceById);
     return router;
 }
 module.exports = ProvinceRoute;

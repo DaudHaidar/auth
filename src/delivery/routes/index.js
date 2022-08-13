@@ -22,11 +22,22 @@ const districtRepository = require('../../repository/district.repository')
 const districtController = require('../controller/district.controller')
 const districtService = require('../../service/district.service')
 
+const usersRouter = require('./users.route')
+const usersController = require('../controller/users.controller')
+const usersService = require('../../service/users.service')
+const UsersRepository = require('../../repository/users.repository')
+
 const authRouter = require('./auth.route');
 const AuthenticationController = require('../controller/authentication.controller');
 const AuthenticationService = require('../../service/authentication.service');
 
 
+
+
+const UsersService = (req,res,next)=>{
+    req.service = userService(UsersRepository(db))
+    next()
+}
 
 const ProvinceService = (req,res,next)=>{
     req.service = provinceService(provinceRepository(db))
@@ -45,11 +56,14 @@ const DistrictService = (req,res,next) => {
 
 
 const authService = (req, res, next) => {
-    req.service = AuthenticationService(UserService(UserRepository(db)));
+    console.log('authService In')
+    req.service = AuthenticationService(usersService(UsersRepository(db)));
+    console.log('authService OUt')
     next()
 }
 
 console.log('index');
+router.use('/init', UsersService, usersRouter(usersController))
 router.use('/province', ProvinceService, provinceRouter(provinceController));
 router.use('/regency', RegencyService, regencyRouter(regencyController));
 router.use('/district',DistrictService,districtRouter(districtController));

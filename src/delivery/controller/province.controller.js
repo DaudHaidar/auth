@@ -1,7 +1,7 @@
 const Response = require ('../../utils/reponse')
 
 const ProvinceController = ( provinceService) =>{
-    console.log('test controller');
+    console.log('test controller province');
     const registerProvince = async (req,res) => {
         try{
             const payload = req.body
