@@ -15,7 +15,7 @@ const Server = () => {
     app.use(errorRoute);
     app.use(noRoute);
     app.use(errorMiddleware)
-    app.listen(port, host, () => {
+    app.listen(5000, host, () => {
         console.info(`App server running on port ${port}`);
     })
 }
